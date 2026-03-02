@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -23,4 +24,27 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.edu-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(113, 113, 122, 0.55) rgba(9, 9, 11, 0.2);
+}
+
+.edu-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.edu-scroll::-webkit-scrollbar-track {
+  background: rgba(9, 9, 11, 0.2);
+  border-radius: 9999px;
+}
+
+.edu-scroll::-webkit-scrollbar-thumb {
+  background: rgba(113, 113, 122, 0.55);
+  border-radius: 9999px;
+}
+
+.edu-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(34, 211, 238, 0.55);
 }
