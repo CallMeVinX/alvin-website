@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom';
+import React from 'react';
 
 jest.mock('framer-motion', () => {
-  const React = require('react');
-
   return {
     motion: {
       div: React.forwardRef(function MockMotionDiv(
@@ -16,15 +15,16 @@ jest.mock('framer-motion', () => {
         },
         ref: React.Ref<HTMLDivElement>
       ) {
-        const {
-          layoutId,
-          initial,
-          animate,
-          exit,
-          transition,
-          layout,
-          ...domProps
-        } = props;
+        const domProps = {
+          ...props,
+        } as React.HTMLAttributes<HTMLDivElement> & Record<string, unknown>;
+
+        delete domProps.layoutId;
+        delete domProps.initial;
+        delete domProps.animate;
+        delete domProps.exit;
+        delete domProps.transition;
+        delete domProps.layout;
 
         return React.createElement('div', { ...domProps, ref }, props.children);
       }),
