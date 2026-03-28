@@ -78,7 +78,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className="scroll-mt-28 min-h-screen px-6 sm:px-10 lg:px-20 py-20 border-t border-white/5">
       <div className="mx-auto max-w-6xl grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-        <article className="h-full rounded-3xl border border-cyan-500/25 bg-gradient-to-br from-cyan-500/10 via-zinc-900/90 to-zinc-900 p-7 sm:p-10">
+        <article className="h-full rounded-3xl border border-cyan-500/25 bg-linear-to-br from-cyan-500/10 via-zinc-900/90 to-zinc-900 p-7 sm:p-10">
           <p className="text-xs uppercase tracking-[0.18em] text-cyan-300 mb-3">Let&apos;s Build</p>
           <h2 className="text-3xl sm:text-4xl font-bold mb-3">Let&apos;s engineer scalable solutions together.</h2>
           <p className="text-zinc-300 leading-relaxed max-w-2xl">
@@ -194,7 +194,7 @@ export default function ContactSection() {
                   </div>
                   <div className="min-w-0 flex-1">
                     <h4 className="text-sm font-semibold text-zinc-100">{channel.title}</h4>
-                    <p className="mt-1 text-xs text-cyan-300 break-words">{channel.value}</p>
+                    <p className="mt-1 text-xs text-cyan-300 wrap-break-word">{channel.value}</p>
                     <p className="mt-2 text-xs text-zinc-400 leading-relaxed">{channel.description}</p>
                   </div>
                 </div>

@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import ProjectsSection from '../ProjectsSection';
 
 jest.mock('next/image', () => {
-    const MockNextImage = ({ alt, fill, priority, ...props }: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean; priority?: boolean }) => (
+    const MockNextImage = ({ alt, ...props }: React.ImgHTMLAttributes<HTMLImageElement> & { fill?: boolean; priority?: boolean }) => (
         // eslint-disable-next-line @next/next/no-img-element
         <img alt={alt} {...props} />
     );

@@ -93,7 +93,7 @@ export default function SkillsSection() {
   return (
     <section id="skills" className="scroll-mt-28 min-h-screen px-6 sm:px-10 lg:px-20 py-20 border-t border-white/5">
       <div className="mx-auto max-w-6xl space-y-5">
-        <div className="relative overflow-hidden rounded-2xl border border-cyan-500/25 bg-gradient-to-br from-cyan-500/10 via-zinc-900/90 to-zinc-900 p-5 sm:p-7">
+        <div className="relative overflow-hidden rounded-2xl border border-cyan-500/25 bg-linear-to-br from-cyan-500/10 via-zinc-900/90 to-zinc-900 p-5 sm:p-7">
           <div className="pointer-events-none absolute -top-12 -right-12 h-28 w-28 rounded-full bg-cyan-500/20 blur-2xl" />
           <div className="pointer-events-none absolute -bottom-12 -left-12 h-28 w-28 rounded-full bg-cyan-700/20 blur-2xl" />
 
@@ -113,10 +113,10 @@ export default function SkillsSection() {
                 key={group.title}
                 className="group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/70 p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/35 hover:bg-zinc-900/85"
               >
-                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-b from-cyan-500/5 via-transparent to-transparent" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-linear-to-b from-cyan-500/5 via-transparent to-transparent" />
 
                 <div className="relative flex h-full flex-col">
-                  <div className="flex items-start gap-3 min-h-[3.75rem]">
+                  <div className="flex items-start gap-3 min-h-15">
                     <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-cyan-400/30 bg-cyan-500/10 text-cyan-300 transition-colors duration-300 group-hover:border-cyan-400/50 group-hover:bg-cyan-500/20">
                     <Icon size={17} />
                     </div>
@@ -133,7 +133,7 @@ export default function SkillsSection() {
                       return (
                         <div
                           key={tag.label}
-                          className="group/skill relative flex min-h-20 flex-col items-center justify-center rounded-xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black/50 px-2 py-2 text-center shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/45 hover:shadow-[0_12px_30px_rgba(6,182,212,0.18)]"
+                          className="group/skill relative flex min-h-20 flex-col items-center justify-center rounded-xl border border-white/10 bg-linear-to-b from-zinc-900 to-black/50 px-2 py-2 text-center shadow-[0_8px_24px_rgba(0,0,0,0.35)] transition-all duration-200 hover:-translate-y-1 hover:border-cyan-400/45 hover:shadow-[0_12px_30px_rgba(6,182,212,0.18)]"
                         >
                           <TechIcon size={20} className={`shrink-0 ${tag.iconClassName ?? "text-zinc-100"} transition-transform duration-200 group-hover/skill:scale-110`} />
                           <span className="mt-2 text-[10px] font-medium uppercase tracking-[0.08em] text-zinc-300">{tag.label}</span>
