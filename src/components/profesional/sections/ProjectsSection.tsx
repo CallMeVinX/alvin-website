@@ -22,7 +22,7 @@ const projectsData: ProjectItem[] = [
     description:
       "An AI-powered Intelligent Urban System for real-time flood monitoring and mitigation in Medan City. Features 0.545cm accuracy IoT sensors and LSTM-based RNN models to predict flood recession with 76.6% accuracy, integrated with dynamic rerouting via Google Directions API.",
     tags: ["#Flutter", "#IoT", "#LSTM", "#FastAPI", "#AI"],
-    image: "/image/floovia.png",
+    image: "/image/Floovia.png",
     status: "Completed",
     demoUrl: "https://lnkd.in/g37SKjjD",
     sourceUrl: "#", 
