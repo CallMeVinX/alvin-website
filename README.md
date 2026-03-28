@@ -1,50 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Alvin Dinata Portfolio
 
-## Getting Started
+Production-ready personal portfolio built with Next.js App Router, TypeScript, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+## Overview
+
+This repository powers a multi-mode portfolio website with:
+
+- Professional and personal views
+- Project showcase cards with optimized image delivery
+- Contact form API integrated with Resend
+- CI pipeline for lint, type-check, test, and build verification
+
+The app metadata is configured for production SEO in `src/app/layout.tsx`.
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- React 19 + TypeScript
+- Tailwind CSS 4
+- Framer Motion
+- Jest + Testing Library
+- Resend (transactional email for contact form)
+
+## Project Structure
+
+High-level application areas:
+
+- `src/app` : routes, layouts, API handlers
+- `src/components/layout` : shared navigation/footer
+- `src/components/profesional/sections` : professional-mode sections (home/profile/skills/projects/contact)
+- `src/components/providers` : mode/theme providers
+- `public/image` : static project and profile assets
+
+## Environment Variables
+
+Create `.env.local` in the project root for local development and set the following values:
+
+```env
+RESEND_API_KEY=<your_resend_api_key>
+RESEND_FROM_EMAIL=<verified_sender_email>
+CONTACT_TO_EMAIL=<destination_inbox_email>
+```
+
+Notes:
+
+- `CONTACT_TO_EMAIL` defaults to `alvin.dinata.work@gmail.com` when omitted.
+- The contact API rejects placeholder credentials and invalid email formats.
+
+## Local Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-## Contact Form Email Setup
+## Production Commands
 
-The contact form in the professional section sends emails through `Resend` using the API route `POST /api/contact`.
+Use these commands as release gates before deploying:
 
-1. Copy `.env.example` to `.env.local`.
-2. Fill Resend variables with your API key and verified sender email.
-3. Keep `CONTACT_TO_EMAIL=alvin.dinata.work@gmail.com` (or change as needed).
+```bash
+npm run lint
+npx tsc --noEmit
+npm run test
+npm run build
+```
 
-Required environment variables:
+Run production server locally after build:
 
-- `RESEND_API_KEY=<your resend api key>`
-- `RESEND_FROM_EMAIL=<your verified sender email>`
-- `CONTACT_TO_EMAIL=<destination inbox>`
+```bash
+npm run start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## CI/CD
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+GitHub Actions workflow (`.github/workflows/ci.yml`) runs on push and pull request to `main`:
 
-## Learn More
+1. Install dependencies (`npm ci`)
+2. Lint (`npm run lint`)
+3. Type check (`npx tsc --noEmit`)
+4. Unit tests (`npm run test`)
+5. Build (`npm run build`)
 
-To learn more about Next.js, take a look at the following resources:
+This ensures only production-safe changes pass into the main branch.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## API: Contact Form
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Endpoint: `POST /api/contact`
 
-## Deploy on Vercel
+Runtime:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Node.js runtime (`export const runtime = "nodejs"`)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Validation behavior:
+
+- Requires `name`, `email`, `subject`, and `message`
+- Validates email format
+- Returns `400` for invalid payload
+- Returns `500` when email service is missing/misconfigured
+- Returns `200` on successful email delivery
+
+Operational behavior:
+
+- Sends email through Resend
+- Uses sender from `RESEND_FROM_EMAIL`
+- Uses `replyTo` as the submitter email
+- Sends to `CONTACT_TO_EMAIL`
+
+## Deployment Guidance
+
+Recommended target: Vercel with Node.js 20+.
+
+Deployment checklist:
+
+1. Configure all required environment variables in the hosting platform.
+2. Ensure image filename casing in `public/image` matches references exactly (important for Linux production environments).
+3. Confirm CI passes for the commit being deployed.
+4. Smoke-test `/`, mode switching, project cards, and `/api/contact` after release.
+
+## Troubleshooting
+
+- Symptom: image renders alt text only
+	Cause: missing file or filename case mismatch
+	Fix: match exact casing between path in code and filename in `public/image`
+
+- Symptom: contact form returns 500
+	Cause: Resend env vars missing/placeholder
+	Fix: set valid `RESEND_API_KEY` and `RESEND_FROM_EMAIL`
+
+## License
+
+This project is private and maintained as a personal portfolio codebase.
